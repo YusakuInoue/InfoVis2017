@@ -1,4 +1,5 @@
-function main(){
+function main()
+{
     var width = 500;
     var height = 500;
 
@@ -15,310 +16,107 @@ function main(){
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
-    
+
     var vertices = [
-	[-1,1,1],
-	[-1,-1,1],
-	[1,-1,1],
-	[1,1,1],
-	[-1,1,-1],
-	[-1,-1,-1],
-	[1,-1,-1],
-	[1,1,-1]
+	[-1, 1, 1],
+	[-1, -1, 1],
+	[1, -1, 1],
+	[1, 1, 1],
+	[-1, 1, -1],
+	[-1, -1, -1],
+	[1, -1, -1],
+	[1, 1, -1]
     ];
- 
-    var faces = [[0,1,2]];
-  
-  var v0 = new THREE.Vector3().fromArray( vertices[0] );
-  var v1 = new THREE.Vector3().fromArray( vertices[1] );
-    var v2 = new THREE.Vector3().fromArray( vertices[2] );
-    var v3 = new THREE.Vector3().fromArray( vertices[3] );
-  var v4 = new THREE.Vector3().fromArray( vertices[4] );
-  var v5 = new THREE.Vector3().fromArray( vertices[5] );
-  var v6 = new THREE.Vector3().fromArray( vertices[6] );
-    var v7 = new THREE.Vector3().fromArray( vertices[7] );
+
+    var faces = [
+	[0, 1, 2],
+	[0, 1, 5],
+	[0, 2, 3],
+	[0, 3, 4],
+	[0, 4, 5],
+	[1, 2, 6],
+	[1, 5, 6],
+	[2, 3, 7],
+	[2, 6, 7],
+	[3, 7, 4],
+	[4, 6, 5],
+	[4, 7, 6]
+    ];
     
-  var id = faces[0];
-    var f0 = new THREE.Face3(id[0],id[1],id[2])
-  var geometry1 = new THREE.Geometry();
-  geometry1.vertices.push(v0);
-  geometry1.vertices.push(v1);
-    geometry1.vertices.push(v2);
-    geometry1.faces.push(f0);
-    var material1 = new THREE.MeshBasicMaterial({color : 0xdddddd})
-    material1.vartexColors = THREE.FaceColors;
-    material1.side=THREE.DoubleSide;
-    tri1 = new THREE.Mesh(geometry1,material1);
-    scene.add(tri1)
-
-    
-     var geometry2 = new THREE.Geometry();
-  geometry2.vertices.push(v2);
-  geometry2.vertices.push(v3);
-    geometry2.vertices.push(v0);
-    geometry2.faces.push(f0);
-    var material2 = new THREE.MeshBasicMaterial({color : 0xdddddd})
-    material2.vartexColors = THREE.FaceColors;
-    material2.side=THREE.DoubleSide;
-    tri2 = new THREE.Mesh(geometry2,material2);
-    scene.add(tri2)
-    
-     var geometry3 = new THREE.Geometry();
-  geometry3.vertices.push(v4);
-  geometry3.vertices.push(v5);
-    geometry3.vertices.push(v6);
-    geometry3.faces.push(f0);
-    var material3 = new THREE.MeshBasicMaterial({color : 0xeeeeee})
-    material3.vartexColors = THREE.FaceColors;
-    material3.side=THREE.DoubleSide;
-    tri3 = new THREE.Mesh(geometry3,material3);
-    scene.add(tri3)
-  
-
-     var geometry4 = new THREE.Geometry();
-  geometry4.vertices.push(v6);
-  geometry4.vertices.push(v7);
-    geometry4.vertices.push(v4);
-    geometry4.faces.push(f0);
-    var material4 = new THREE.MeshBasicMaterial({color : 0x111001})
-    material4.vartexColors = THREE.FaceColors;
-    material4.side=THREE.DoubleSide;
-    tri4 = new THREE.Mesh(geometry4,material4);
-    scene.add(tri4)
-
-     var geometry5 = new THREE.Geometry();
-  geometry5.vertices.push(v0);
-  geometry5.vertices.push(v4);
-    geometry5.vertices.push(v5);
-    geometry5.faces.push(f0);
-    var material5 = new THREE.MeshBasicMaterial({color : 0x000011})
-    material5.vartexColors = THREE.FaceColors;
-    material5.side=THREE.DoubleSide;
-    tri5 = new THREE.Mesh(geometry5,material5);
-    scene.add(tri5)
-
-     var geometry6 = new THREE.Geometry();
-  geometry6.vertices.push(v5);
-    geometry6.vertices.push(v1);
-    geometry6.vertices.push(v0);
-    geometry6.faces.push(f0);
-    var material6 = new THREE.MeshBasicMaterial({color : 0x111000})
-    material6.vartexColors = THREE.FaceColors;
-    material6.side=THREE.DoubleSide;
-    tri6 = new THREE.Mesh(geometry6,material6);
-    scene.add(tri6)
-
-     var geometry7 = new THREE.Geometry();
-  geometry7.vertices.push(v3);
-  geometry7.vertices.push(v2);
-    geometry7.vertices.push(v6);
-    geometry7.faces.push(f0);
-    var material7 = new THREE.MeshBasicMaterial({color : 0xdddddd})
-    material7.vartexColors = THREE.FaceColors;
-    material7.side=THREE.DoubleSide;
-    tri7 = new THREE.Mesh(geometry7,material7);
-    scene.add(tri7)
-
-     var geometry8 = new THREE.Geometry();
-  geometry8.vertices.push(v6);
-  geometry8.vertices.push(v7);
-    geometry8.vertices.push(v3);
-    geometry8.faces.push(f0);
-    var material8 = new THREE.MeshBasicMaterial({color : 0xdddddd})
-    material8.vartexColors = THREE.FaceColors;
-    material8.side=THREE.DoubleSide;
-    tri8 = new THREE.Mesh(geometry8,material8);
-    scene.add(tri8)
-
-     var geometry9 = new THREE.Geometry();
-  geometry9.vertices.push(v0);
-  geometry9.vertices.push(v5);
-    geometry9.vertices.push(v7);
-    geometry9.faces.push(f0);
-    var material9 = new THREE.MeshBasicMaterial({color : 0xcccccc})
-    material9.vartexColors = THREE.FaceColors;
-    material9.side=THREE.DoubleSide;
-    tri9 = new THREE.Mesh(geometry9,material9);
-    scene.add(tri9)
-
-     var geometry10 = new THREE.Geometry();
-  geometry10.vertices.push(v7);
-  geometry10.vertices.push(v4);
-    geometry10.vertices.push(v0);
-    geometry10.faces.push(f0);
-    var material10 = new THREE.MeshBasicMaterial({color : 0xbbbbbb})
-    material10.vartexColors = THREE.FaceColors;
-    material10.side=THREE.DoubleSide;
-    tri10 = new THREE.Mesh(geometry10,material10);
-    scene.add(tri10)
-
-     var geometry11 = new THREE.Geometry();
-  geometry11.vertices.push(v1);
-  geometry11.vertices.push(v2);
-    geometry11.vertices.push(v6);
-    geometry11.faces.push(f0);
-    var material11 = new THREE.MeshBasicMaterial({color : 0xaaaaaa})
-    material11.vartexColors = THREE.FaceColors;
-    material11.side=THREE.DoubleSide;
-    tri11 = new THREE.Mesh(geometry11,material11);
-    scene.add(tri11)
-
-     var geometry12 = new THREE.Geometry();
-  geometry12.vertices.push(v6);
-  geometry12.vertices.push(v5);
-    geometry12.vertices.push(v1);
-    geometry12.faces.push(f0);
-    var material12 = new THREE.MeshBasicMaterial({color : 0xffffff})
-    material12.vartexColors = THREE.FaceColors;
-    material12.side=THREE.DoubleSide;
-    tri12 = new THREE.Mesh(geometry12,material12);
-    scene.add(tri12)
-
-    var light = new THREE.SpotLight(0xff00ff,10.0); 
-    light.position.set(1,1,1);
-    scene.add(light);
-   
-    document.addEventListener('mousedown',mouse_down_event);
-
-    function mouse_down_event(event){
-	var vx = renderer.domElement.offsetLeft;
-	var vy = renderer.domElement.offsetTop;
-
-	var vw = renderer.domElement.width;
-	var vh = renderer.domElement.height;
-
-	var x_win = event.clientX;
-	var y_win = event.clientY;
-
-	var x_NDC = 2*(x_win-vx)/vw-1;
-	var y_NDC = -(2*(y_win-vy)/vh-1);
-
-
-	var p_NDC = newTHREE.Vector3(x_NDC, y_NDC, 1);
-	var p_wid = p_NDC.unproject(camera);
-
-	var ray = new THREE.Raycaster(camera.position, p_wid.sub(camera.position).normalize());
-
-	var int1 = ray.intersactObject(tri1);
-	if(int1.length>0){
-	    int1[0].face.color.setRGB(1,0,0);
-	    int1[0].object.geometry.colorsNeedUpdate = true;
-	}
-
-	var int2 = ray.intersactObject(tri2);
-	if(int2.length>0){
-	    int2[0].face.color.setRGB(1,0,0);
-	    int2[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int3 = ray.intersactObject(tri3);
-	if(int3.length>0){
-	    int3[0].face.color.setRGB(1,0,0);
-	    int3[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int4 = ray.intersactObject(tri4);
-	if(int4.length>0){
-	    int4[0].face.color.setRGB(1,0,0);
-	    int4[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int5 = ray.intersactObject(tri5);
-	if(int5.length>0){
-	    int5[0].face.color.setRGB(1,0,0);
-	    int5[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int6 = ray.intersactObject(tri6);
-	if(int6.length>0){
-	    int6[0].face.color.setRGB(1,0,0);
-	    int6[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int7 = ray.intersactObject(tri7);
-	if(int7.length>0){
-	    int7[0].face.color.setRGB(1,0,0);
-	    int7[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int8 = ray.intersactObject(tri8);
-	if(int8.length>0){
-	    int8[0].face.color.setRGB(1,0,0);
-	    int8[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int9 = ray.intersactObject(tri9);
-	if(int9.length>0){
-	    int9[0].face.color.setRGB(1,0,0);
-	    int9[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int10 = ray.intersactObject(tri10);
-	if(int10.length>0){
-	    int10[0].face.color.setRGB(1,0,0);
-	    int10[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int11 = ray.intersactObject(tri11);
-	if(int11.length>0){
-	    int11[0].face.color.setRGB(1,0,0);
-	    int11[0].object.geometry.colorsNeedUpdate = true;
-	}
-	var int12 = ray.intersactObject(tri12);
-	if(int12.length>0){
-	    int12[0].face.color.setRGB(1,0,0);
-	    int12[0].object.geometry.colorsNeedUpdate = true;
-	}
+    var vec = [];
+    for (var i=0; i<8; i++){
+	vec[i] = new THREE.Vector3().fromArray(vertices[i]);
     }
-	
+    
+    var f = [];
+    var id;
+    for(var i=0; i<12; i++){
+	    id = faces[i];
+	    f[i] = new THREE.Face3(id[0], id[1], id[2]);
+    }
+    
+    var geometry = new THREE.Geometry();
+    for(var i=0; i<8; i++){
+	    geometry.vertices.push(vec[i]);
+    }
+    for(var i=0; i<12; i++){
+	    geometry.faces.push(f[i]);
+    }
+ 
+    var material = new THREE.MeshBasicMaterial();
+    material.vertexColors = THREE.FaceColors;
+    for(var i=0; i<12; i++){
+	    geometry.faces[i].color = new THREE.Color(1,1,1);
+    }
 
-    
-    geometry1.computeFaceNormals();
-    geometry1.computeVertexNormals();
-     geometry2.computeFaceNormals();
-    geometry2.computeVertexNormals();
-     geometry3.computeFaceNormals();
-    geometry3.computeVertexNormals();
-     geometry4.computeFaceNormals();
-    geometry4.computeVertexNormals();
-     geometry5.computeFaceNormals();
-    geometry5.computeVertexNormals();
-     geometry6.computeFaceNormals();
-    geometry6.computeVertexNormals();
-     geometry7.computeFaceNormals();
-    geometry7.computeVertexNormals();
-     geometry8.computeFaceNormals();
-    geometry8.computeVertexNormals();
-     geometry9.computeFaceNormals();
-    geometry9.computeVertexNormals();
-     geometry10.computeFaceNormals();
-    geometry10.computeVertexNormals();
-     geometry11.computeFaceNormals();
-    geometry11.computeVertexNormals();
-     geometry12.computeFaceNormals();
-    geometry12.computeVertexNormals();
-    
+    geometry.computeFaceNormals();
+
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    var light = new THREE.DirectionalLight(0xF4FA58);
+    light.position.set(10,10,10);
+    scene.add(light);
+
+    document.addEventListener('mousedown', mouse_down_event);
+    function mouse_down_event(event) {
+        var x_win = event.clientX;
+        var y_win = event.clientY;
+
+        var vx = renderer.domElement.offsetLeft;
+        var vy = renderer.domElement.offsetTop;
+        var vw = renderer.domElement.width;
+        var vh = renderer.domElement.height;
+
+        var x_NDC = 2*(x_win - vx)/vw-1;
+        var y_NDC = -(2*(y_win -vy)/vh-1);
+
+        var p_NDC = new THREE.Vector3(x_NDC,y_NDC,1);
+        p_NDC.unproject(camera);
+
+        var origin = camera.position;
+        var direction = p_NDC.sub(camera.position).normalize();
+
+        var raycaster = new THREE.Raycaster(origin, direction);
+        var intersects = raycaster.intersectObjects(scene.children);
+        if(intersects.length>0){
+            var color = intersects[0].face.color;
+            if(color.r==1&&color.g==1&&color.b==1) {
+                color.setRGB(1, 1, 0);
+                intersects[0].object.geometry.colorsNeedUpdate = true;
+            }else{
+                color.setRGB(0, 1, 1);
+                intersects[0].object.geometry.colorsNeedUpdate = true;
+            }
+        }
+    }
 
     loop();
     function loop()
     {
         requestAnimationFrame( loop );
-	mouse_down_event();
-        tri1.rotation.x += 0.005;
-        tri1.rotation.y += 0.005;
-	tri2.rotation.x += 0.005;
-        tri2.rotation.y += 0.005;
-	tri3.rotation.x += 0.005;
-        tri3.rotation.y += 0.005;
-	tri4.rotation.x += 0.005;
-        tri4.rotation.y += 0.005;
-	tri5.rotation.x += 0.005;
-        tri5.rotation.y += 0.005;
-	tri6.rotation.x += 0.005;
-        tri6.rotation.y += 0.005;
-	tri7.rotation.x += 0.005;
-        tri7.rotation.y += 0.005;
-	tri8.rotation.x += 0.005;
-        tri8.rotation.y += 0.005;
-	tri9.rotation.x += 0.005;
-        tri9.rotation.y += 0.005;
-	tri10.rotation.x += 0.005;
-        tri10.rotation.y += 0.005;
-	tri11.rotation.x += 0.005;
-        tri11.rotation.y += 0.005;
-	tri12.rotation.x += 0.005;
-        tri12.rotation.y += 0.005;
+        cube.rotation.x += 0.005;
+        cube.rotation.y += 0.005;
         renderer.render( scene, camera );
     }
 }
