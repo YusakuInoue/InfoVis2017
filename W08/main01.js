@@ -1,4 +1,3 @@
-
 function main()
 {
     var width = 500;
@@ -21,15 +20,40 @@ function main()
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
+    
+    
+	vec3 LambertianReflection( vec3 C, vec3 L, vec3 N ){
+		float ka = 0.4;
+		float kd = 0.6;
+		float dd = max( dot( N, L ), 0.0 );
+		float Ia = ka;
+		float Id = kd * dd;
+		return C * ( Ia + Id );
+	}
+
+	vec3 PhongReflection( vec3 C, vec3 L, vec3 N ){
+		float ka = 0.3;
+		float kd = 0.5;
+		float ks = 0.8;
+		float n = 50.0;
+		vec3 R = reflect( -L, N );
+		float dd = max( dot( N, L ), 0.0 );
+		float ds = pow( max( dot( R, V ), 0.0 ), n );
+		if ( dd <= 0.0 ) { ds = 0.0; }
+		float Ia = ka;
+		float Id = kd * dd;
+		float Is = ks * ds;
+		return C * ( Ia + Id + Is );
+	}
 
     var geometry = new THREE.TorusKnotGeometry( 1, 0.3, 100, 20 );
+    
     var material = new THREE.ShaderMaterial({
-	vertexColors : THREE.VertexColors,
-	vertexShader : document.getElementById('gouraud.vert').text,
-	uniforms:{
-	    light_position:{type:'v3',value:light.position}
-	}
-    });
+		vertexColors: THREE.VertexColors,
+		vertexShader: document.getElementById('gouraud.vert').text,
+		fragmentShader: document.getElementById('gouraud.frag').text,
+		uniforms: {light_position: { type: 'v3', value: light.position }}
+	});
 
     var torus_knot = new THREE.Mesh( geometry, material );
     scene.add( torus_knot );
@@ -44,4 +68,3 @@ function main()
         renderer.render( scene, camera );
     }
 }
-
