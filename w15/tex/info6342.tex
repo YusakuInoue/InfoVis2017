@@ -1,0 +1,159 @@
+\documentclass[9pt,a4paper]{jsarticle} 
+
+\usepackage[left=15mm,right=15mm,top=15mm,bottom=20mm]{geometry}
+\pagestyle{empty} 
+
+\usepackage{amsmath} 
+\usepackage{amssymb}
+\usepackage{ascmac} 
+\usepackage{epsfig}
+\usepackage{listings,jlisting}
+
+\title{{\bf Information Visualization W15: Final Tasks}}
+\author{{\bf
+	\begin{tabular}{c}
+	167X009X 阪口 宰\\
+	\end{tabular}
+}}
+\date{2016年6月17日提出分} 
+
+\begin{document} 
+\maketitle
+
+\section*{プログラム概要}
+ブラウザ上でBoxGeometryのプロパティ値を動的に変更できるプログラムを作成した．パラメータを変化させるため，授業でも紹介のあったdat.GUIを導入している．
+\section*{ソースコード}
+今回使用したソースコードを掲載する．使用しているライブラリは細かな作業のためのjQueryと，ThreeJSからはthree.min.js，Detector.js，OrbitControls.js，dat.gui.min.jsを読み込んでいる．簡易的な解説のため，各センテンスに概要コメントを注釈しておく．
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, frame=single]
+(function($){
+	var width = 640;  
+	var height = 480; 
+	var scene,camera,renderer,controls,geoObj,mesh;
+	 
+	function main(){
+		//WebGL環境確認
+		if(!Detector.webgl)Detector.addGetWebGLMessage();
+		//GUI導入
+		var gui = new dat.GUI();
+
+		scene = new THREE.Scene();
+ 
+		// カメラ:透視投影
+		camera = new THREE.PerspectiveCamera( 60, width/height, 0.001, 2000);
+		scene.add(camera);
+		camera.position.set( 0, 20, 40);
+ 
+		// レンダラー
+		renderer = new THREE.WebGLRenderer({antialias: true});
+		renderer.setSize(width,height);
+		renderer.setPixelRatio( window.devicePixelRatio);
+		renderer.shadowMap.enabled = true;
+		document.body.appendChild( renderer.domElement );
+ 
+		// ジオメトリー
+		var material = new THREE.MeshLambertMaterial({color: 0xFFA500});
+		mesh = new THREE.Mesh();
+		mesh.material = material;
+		mesh.position.set(0,0,0);
+		mesh.castShadow = true;
+		scene.add(mesh);
+		
+		// パラメーター設置
+		geoObj = new geoCtrl();
+		var folder = gui.addFolder('BoxGeometry')
+		folder.add( geoObj, 'x', 10, 80 ).onChange( setGeoVal);
+		folder.add( geoObj, 'y', 10, 80 ).onChange( setGeoVal);
+		folder.add( geoObj, 'z', 10, 80 ).onChange( setGeoVal);
+		setGeoVal();
+		
+		// 自然光
+		var ambientLight = new THREE.AmbientLight( 0xDDDDCC, 0.8);
+
+		// スポットライト
+		var spotLight = new THREE.SpotLight(0xFFFFFF,1.2,0);
+		spotLight.castShadow = true;
+		spotLight.position.set( 10, 30, 30);
+		scene.add(ambientLight,spotLight);
+ 
+		//コントローラー
+		controls = new THREE.OrbitControls(camera);
+		controls.maxDistance = 100;
+		controls.maxPolarAngle = Math.PI * 0.48;
+		
+		resizeSet();
+		setTimeout(resize, 1);
+
+		//自動回転
+		controls.autoRotate = true;
+		controls.autoRotateSpeed = 2.0;
+ 
+		rendering();
+	}
+ 
+	//GUIパラメータの初期値
+	var geoCtrl = function(){
+		this.x = 20;
+		this.y = 20;
+		this.z = 20;
+	};
+	
+	//GUIパラメータの準備
+	function setGeoVal(){
+		mesh.geometry.dispose();
+		mesh.geometry = new THREE.BoxGeometry( geoObj.x, geoObj.y ,geoObj.z );
+	}
+ 
+	function rendering(){
+		requestAnimationFrame(rendering);
+		controls.update();
+		renderer.render( scene, camera);
+	}
+ 
+	function resizeSet(){
+		var queue = null; // キューをストック 
+    	var wait = 300; // 0.3秒後に実行 
+    	window.addEventListener( 'resize', function() {
+    		clearTimeout( queue );
+    		queue = setTimeout(function() {
+    				resize();
+    		}, wait );
+    	}, false );
+    };
+	function resize(){
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		camera.aspect = width/height;
+		camera.updateProjectionMatrix();
+		renderer.setSize(width, height);
+	}
+ 
+	$(function(){
+		main();
+	});
+})(jQuery);
+\end{lstlisting}
+
+\subsection*{実行結果}
+
+プログラムを実行させると、図\ref{1}のような画面が表示される。開始直後のBoxGeometryの形状は$(x:y:z)=(20\times20\times20)$の立方体である。
+
+\begin{figure}[htbp]
+  \begin{center} %センタリングする
+    \includegraphics[clip,width=10.0cm]{2.eps}
+    \caption{プログラム実行直後のBoxGeometry} %タイトルをつける
+    \label{1} %ラベルをつけ図の参照を可能にする
+  \end{center}
+\end{figure}
+
+画面右上のボックスのシークバーを前後させると、各軸方向の辺の大きさを$10\leqq\cdot\leqq80$の範囲で変更させることができる。なお、図\ref{2}は、$y=35$に変更した例である。
+
+\begin{figure}[htbp]
+  \begin{center} %センタリングする
+    \includegraphics[clip,width=10.0cm]{1.eps}
+    \caption{GUIでパラメータを変化させたBoxGeometry} %タイトルをつける
+    \label{2} %ラベルをつけ図の参照を可能にする
+  \end{center}
+\end{figure}
+
+\end{document}
