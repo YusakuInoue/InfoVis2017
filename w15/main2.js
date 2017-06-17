@@ -4,31 +4,31 @@
 	var scene,camera,renderer,controls,geoObj,mesh;
 	 
 	function main(){
-		if(!Detector.webgl)Detector.addGetWebGLMessage();//WebGLŠÂ‹«Šm”F
+		if(!Detector.webgl)Detector.addGetWebGLMessage();//WebGLç’°å¢ƒç¢ºèª
 		var gui = new dat.GUI();
 		scene = new THREE.Scene();
  
-		// ƒJƒƒ‰:“§‹“Š‰e
+		// ã‚«ãƒ¡ãƒ©:é€è¦–æŠ•å½±
 		camera = new THREE.PerspectiveCamera( 60, width/height, 0.001, 2000);
 		scene.add(camera);
 		camera.position.set( 0, 20, 40);
  
-		// ƒŒƒ“ƒ_ƒ‰[
+		// ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼
 		renderer = new THREE.WebGLRenderer({antialias: true});
 		renderer.setSize(width,height);
 		renderer.setPixelRatio( window.devicePixelRatio);
 		renderer.shadowMap.enabled = true;
 		document.body.appendChild( renderer.domElement );
  
-		// ƒWƒIƒƒgƒŠ[
-		var material = new THREE.MeshLambertMaterial({color: 0xFFA500});
+		// ã‚¸ã‚ªãƒ¡ãƒˆãƒªãƒ¼
+		var material = new THREE.MeshLambertMaterial({color: 0x22ABCD});
 		mesh = new THREE.Mesh();
 		mesh.material = material;
 		mesh.position.set(0,0,0);
 		mesh.castShadow = true;
 		scene.add(mesh);
 		
-		// ƒpƒ‰ƒ[ƒ^[İ’u
+		// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼è¨­ç½®
 		geoObj = new geoCtrl();
 		var folder = gui.addFolder('BoxGeometry')
 		folder.add( geoObj, 'x', 10, 80 ).onChange( setGeoVal);
@@ -36,16 +36,16 @@
 		folder.add( geoObj, 'z', 10, 80 ).onChange( setGeoVal);
 		setGeoVal();
 		
-		// ©‘RŒõ
+		// è‡ªç„¶å…‰
 		var ambientLight = new THREE.AmbientLight( 0xDDDDCC, 0.8);
 
-		// ƒXƒ|ƒbƒgƒ‰ƒCƒg
+		// ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆ
 		var spotLight = new THREE.SpotLight(0xFFFFFF,1.2,0);
 		spotLight.castShadow = true;
 		spotLight.position.set( 10, 30, 30);
 		scene.add(ambientLight,spotLight);
  
-		//ƒRƒ“ƒgƒ[ƒ‰[
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 		controls = new THREE.OrbitControls(camera);
 		controls.maxDistance = 100;
 		controls.maxPolarAngle = Math.PI * 0.48;
@@ -53,14 +53,14 @@
 		resizeSet();
 		setTimeout(resize, 1);
 		
-		//©“®‰ñ“]
+		//è‡ªå‹•å›è»¢
 		controls.autoRotate = true;
 		controls.autoRotateSpeed = 2.0;
  
 		rendering();
 	}
  
-	//GUIƒpƒ‰ƒ[ƒ^‚Ì€”õ
+	//GUIãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æº–å‚™
 	var geoCtrl = function(){
 		this.x = 20;
 		this.y = 20;
@@ -79,8 +79,8 @@
 	}
  
 	function resizeSet(){
-		var queue = null; // ƒLƒ…[‚ğƒXƒgƒbƒN 
-    	var wait = 300; // 0.3•bŒã‚ÉÀs‚Ìê‡ 
+		var queue = null; // ã‚­ãƒ¥ãƒ¼ã‚’ã‚¹ãƒˆãƒƒã‚¯ 
+    	var wait = 300; // 0.3ç§’å¾Œã«å®Ÿè¡Œã®å ´åˆ 
     	window.addEventListener( 'resize', function() {
     		clearTimeout( queue );
     		queue = setTimeout(function() {
